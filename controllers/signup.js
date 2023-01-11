@@ -1,4 +1,7 @@
 const User = require('../models/user');
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
+
 
 const bcrypt = require('bcrypt');
 
@@ -20,48 +23,54 @@ exports.postSignup = async (req, res, next) => {
                 
                     throw new Error('All fields are required');
                 }
-                await User.findOne({ email: email , phone : phone }).then(userDoc => {
+                User.findAll({where : {
+                    [Op.or]: [
+                        {email: email},
+                        {phone: phone}
+                    ]
+                }}).then(user => {
+                    
+                    if(user.length > 0) {
 
-                    if(userDoc) {
-
-                        res.status(422).json({  message: 'User already exists' });
+                        res.status(422).json({ message: 'User already exists' });
                     }
-                });
+                    else {
 
+                        bcrypt.hash(password, 12).then(hashedPassword => {
                 
-                bcrypt.hash(password, 12).then(hashedPassword => {
-                
-                    const user = new User({
-                    
-                        name: name,
-                        password: hashedPassword,
-                        email: email,
-                        phone: phone,
-                        isPremium: false
-                    
+                          
+                        
+                            User.create({
+                                name: name,
+                                password: hashedPassword,
+                                email: email,
+                                phone: phone,
+                                isPremium: false
+                            }).then(user => {
+                                
+                                res.status(201).json({ message: 'User created' });
+                                
+                            }).catch(err => {
+
+                                throw new Error(err);
+                            });
+
+
+                        
+                        })
+                        .catch(err => {
+
+                            throw new Error(err);
+                        });
+                    }
+                }).catch(err => {
+                        
+                        throw new Error(err);
                     });
-                
-                    return user.save();
-                
-                }).then(result => {
-                
-                    res.status(201).json({
-                    
-                        message: 'User created!',
-                    
-                        userId: result._id
-                    
-                    });
 
-                    }).catch(err => {
-                    
-                        if (!err.statusCode) {
-
-                            err.statusCode = 500;
-
-                        }
-                                        
-                    });
+            
+                
+                
 
 
     }
