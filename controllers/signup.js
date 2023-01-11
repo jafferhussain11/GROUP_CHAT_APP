@@ -7,7 +7,7 @@ const bcrypt = require('bcrypt');
 
 const path = require('path');
 
-const jwt = require('jsonwebtoken');
+
 
 
 exports.postSignup = async (req, res, next) => {
@@ -49,7 +49,7 @@ exports.postSignup = async (req, res, next) => {
                             }).then(user => {
                                 
                                 res.status(201).json({ message: 'User created' });
-                                
+
                             }).catch(err => {
 
                                 throw new Error(err);

@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
+const path = require('path');
 
 const dotenv = require('dotenv');
 dotenv.config();
@@ -11,6 +12,7 @@ const sequelize = require('./util/database');
 const User = require('./models/user');
 
 const signupRoutes = require('./routes/signup');
+const loginRoutes = require('./routes/login');
 
 
 
@@ -21,8 +23,13 @@ app.use(cors({
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
 
 }));
+
+
 app.use(signupRoutes);
+app.use(loginRoutes);
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'views')));
 
 
 
