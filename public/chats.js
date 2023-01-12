@@ -1,45 +1,97 @@
 
 const sendbtn = document.getElementById('sendbtn');
 
-let chatsarr = [];
+let chatsarrFinal = [];
 
 let messageInput = document.getElementById('message');
-let lastChecked = null;
+// let lastChecked = null;
 
 
-let isTyping = false;
+// let isTyping = false;
 
-messageInput.addEventListener('input', () => {
-    isTyping = true;
-});
+// messageInput.addEventListener('input', () => {
+//     isTyping = true;
+// });
 
-messageInput.addEventListener('blur', () => {
-    isTyping = false;
-});
+// messageInput.addEventListener('blur', () => {
+//     isTyping = false;
+// });
 
-function checkForUpdates() {
+window.addEventListener('load', () => {
+
+    const token = localStorage.getItem('token');
+    const lastMessageId = localStorage.getItem('lastMessageId');
+    console.log(lastMessageId);
+    let oldMessages = localStorage.getItem('oldMessages');
     
-    if (!isTyping) {
-        //make the request to server
-        const currentTime = Date.now();
-        if (!lastChecked || currentTime - lastChecked > 1000) {
-            lastChecked = currentTime;
-            const token = localStorage.getItem('token');
-            axios.get('http://localhost:3000/chats', { headers: { Authorization: token } })
-                .then(response => {
-                    console.log(response);
-                    chatsarr = response.data.chats;
-                    chatsarr.forEach(chat => {
-                        displayMessage(chat);
-                    });
-                })
-                .catch(err => {
-                    console.log(err);
+
+    axios.get(`http://localhost:3000/chats?lastMessageID=${lastMessageId}`, { headers: { Authorization: token } })
+
+        .then(response => {
+
+            console.log(response);
+            const newmessages = response.data.chats; //new messages
+            
+            if (oldMessages) {
+
+                const oldMessagesParsed  = JSON.parse(oldMessages);
+                chatsarrFinal = [...oldMessagesParsed, ...newmessages];
+                console.log(chatsarrFinal);
+                
+                chatsarrFinal.forEach(chat => {
+
+                    displayMessage(chat);
+
+
                 });
-        }
-    }
-}
-setInterval(checkForUpdates, 1000);
+            }
+            else {
+
+                chatsarrFinal = newmessages;
+                chatsarrFinal.forEach(chat => {
+
+                    displayMessage(chat);
+
+                });
+
+            }
+            if(chatsarrFinal.length > 10) {
+
+                    chatsarrFinal = chatsarrFinal.slice(chatsarrFinal.length - 10);
+                    localStorage.setItem('oldMessages', JSON.stringify(chatsarrFinal));
+                    localStorage.setItem('lastMessageId', chatsarrFinal[chatsarrFinal.length - 1].id);
+            }
+            
+            
+        })
+        .catch(err => {
+
+            console.log(err);
+        });
+});
+// function checkForUpdates() {
+    
+//     if (!isTyping) {
+//         //make the request to server
+//         const currentTime = Date.now();
+//         if (!lastChecked || currentTime - lastChecked > 1000) {
+//             lastChecked = currentTime;
+//             const token = localStorage.getItem('token');
+//             axios.get('http://localhost:3000/chats', { headers: { Authorization: token } })
+//                 .then(response => {
+//                     console.log(response);
+//                     chatsarrFinal = response.data.chats;
+//                     chatsarrFinal.forEach(chat => {
+//                         displayMessage(chat);
+//                     });
+//                 })
+//                 .catch(err => {
+//                     console.log(err);
+//                 });
+//         }
+//     }
+// }
+// setInterval(checkForUpdates, 1000);
 
 
 sendbtn.addEventListener('click', (e) => {
@@ -50,8 +102,9 @@ sendbtn.addEventListener('click', (e) => {
     axios.post('http://localhost:3000/chats', { message }, { headers: { Authorization: token } }).then(response => {
 
         console.log(response);
+
         //reload the page
-        //window.location.reload();
+        window.location.reload();
 
 }).catch(err => {
 

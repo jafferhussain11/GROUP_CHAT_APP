@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const Chat = require('../models/chats');
+const { Op } = require('sequelize');
 
 const bcrypt = require('bcrypt');
 const path = require('path');
@@ -12,10 +13,16 @@ exports.getChats = async (req, res, next) => {
 
     try{
             let chats = [];
+            let lastMessageId = req.query.lastMessageID;
+            if(lastMessageId == undefined) {
+                lastMessageId = 0;
+            }
+            console.log(lastMessageId);
             Chat.findAll({
 
-                attributes : ['message','createdAt','UserId','User.name'],
+                attributes : ['message','createdAt','UserId','User.name','id'],
                 include: [{ model: User, attributes: ['name'] }],
+                where: { id: { [Op.gt]: lastMessageId } },
                 order: [['createdAt', 'ASC']]
             
 
