@@ -2,24 +2,45 @@
 const sendbtn = document.getElementById('sendbtn');
 
 let chatsarr = [];
-window.addEventListener('load', () => {
 
-    const token = localStorage.getItem('token');
-    axios.get('http://localhost:3000/chats', { headers: { Authorization: token } }).then(response => {
+let messageInput = document.getElementById('message');
+let lastChecked = null;
 
-        console.log(response);
-        chatsarr = response.data.chats;
-        
-        chatsarr.forEach(chat => {
 
-            displayMessage(chat);
-        })
+let isTyping = false;
 
-    }).catch(err => {
+messageInput.addEventListener('input', () => {
+    isTyping = true;
+});
 
-        console.log(err);
-    })
-})
+messageInput.addEventListener('blur', () => {
+    isTyping = false;
+});
+
+function checkForUpdates() {
+    
+    if (!isTyping) {
+        //make the request to server
+        const currentTime = Date.now();
+        if (!lastChecked || currentTime - lastChecked > 1000) {
+            lastChecked = currentTime;
+            const token = localStorage.getItem('token');
+            axios.get('http://localhost:3000/chats', { headers: { Authorization: token } })
+                .then(response => {
+                    console.log(response);
+                    chatsarr = response.data.chats;
+                    chatsarr.forEach(chat => {
+                        displayMessage(chat);
+                    });
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+        }
+    }
+}
+setInterval(checkForUpdates, 1000);
+
 
 sendbtn.addEventListener('click', (e) => {
 
@@ -30,7 +51,7 @@ sendbtn.addEventListener('click', (e) => {
 
         console.log(response);
         //reload the page
-        window.location.reload();
+        //window.location.reload();
 
 }).catch(err => {
 
