@@ -11,7 +11,7 @@ const signupcontroller = require('../controllers/signup');
 
 router.get('/signup', (req, res, next) => {
 
-    res.sendFile(path.join(__dirname, '../', 'views/signup', 'signup.html'));
+    res.sendFile(path.join(__dirname, '../', 'views', 'signup.html'));
 
 });
 

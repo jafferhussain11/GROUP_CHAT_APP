@@ -45,7 +45,7 @@ exports.postSignup = async (req, res, next) => {
                                 password: hashedPassword,
                                 email: email,
                                 phone: phone,
-                                isPremium: false
+                                isLoggedIn: false
                             }).then(user => {
                                 
                                 res.status(201).json({ message: 'User created' });

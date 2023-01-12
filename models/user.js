@@ -31,7 +31,7 @@ const User = sequelize.define('User', {
         allowNull: false,
         unique: true
     },
-    isPremium : {
+    isLoggedIn : {
         type: Sequelize.BOOLEAN
     }
 });

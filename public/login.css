@@ -1,5 +1,8 @@
 body {
     font-family: sans-serif;
+    background-image: url("https://img.freepik.com/free-vector/illustration-business-people_53876-6308.jpg?w=740&t=st=1673456953~exp=1673457553~hmac=b10b8e8507790e6e7af7a61324cfad158e1ccb910ff60eaddd30ae8f2110cdaa");
+    background-size: fill;
+    background-position: right;
 }
 h1 {
     text-align: center;

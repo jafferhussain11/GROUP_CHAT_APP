@@ -16,11 +16,10 @@ loginbtn.addEventListener('click', (e) => {
     .then(response => {
    
         alert(response.data.message);
-        //store token in local storage
         console.log(response);
         localStorage.setItem('token', response.data.token);
-        //window.location.reload();
-       // window.location.href = "http://localhost:3000/expenses.html";
+        window.location.href = 'http://localhost:3000/chats.html';
+        
       
     })
     .catch(error => {

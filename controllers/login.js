@@ -7,7 +7,7 @@ const path = require('path');
 
 exports.getLogin = async (req, res, next) => {
 
-    res.sendFile(path.join(__dirname, '../', 'views/login', 'login.html'));
+    res.sendFile(path.join(__dirname, '../', 'views', 'login.html'));
 
 };
 exports.postLogin = async (req, res, next) => {
@@ -39,7 +39,16 @@ exports.postLogin = async (req, res, next) => {
                         const token = jwt.sign({ userId: user.id, email: user.email },
                             process.env.JWT_KEY,
                             { expiresIn: '1h' });
-                        res.status(200).json({token : token , message : 'Logged in successfully'});
+                        
+                        user.update({isLoggedIn: true}).then(user => {
+
+                              
+                                    res.status(200).json({token : token , message : 'Logged in successfully'});
+                        
+                        }).catch(err => {
+
+                            throw new Error(err);
+                        });
                     }
                     else {
 
