@@ -11,10 +11,8 @@
 <body>
     <div class="group-list">
         <h2>Groups</h2>
-        <ul>
-            <li><a href="#group1">Group 1</a></li>
-            <li><a href="#group2">Group 2</a></li>
-            <li><a href="#group3">Group 3</a></li>
+        <ul id="groupbox">
+            
         </ul>
     </div>
     
@@ -26,14 +24,20 @@
           <div id ="chatbox" class="chat-messages">
             <!-- Messages will be appended here dynamically using JavaScript -->
           </div>
-        </div>
-        <div class="chat-input">
-          <form>
-            <input type="text" id="message" placeholder="Type your message here...">
-            <button id ="sendbtn" type="submit">Send</button>
-          </form>
+          <div class="chat-input">
+            <form>
+              <input type="text" id="message" placeholder="Type your message here...">
+              <button id ="sendbtn" type="submit">Send</button>
+            </form>
+          </div>
         </div>
       </div>
+
+      <div id="notification-bar">
+        <p id="notification-message"></p>
+        <button id="close-btn">X</button>
+      </div>
+    
       <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.1.3/axios.min.js"></script>
     
 </body>

@@ -19,6 +19,7 @@ const signupRoutes = require('./routes/signup');
 const loginRoutes = require('./routes/login');
 const chatRoutes  = require('./routes/chats');
 const groupRoutes = require('./routes/groups');
+const adminRoutes = require('./routes/admin');
 const { on } = require('events');
 
 
@@ -37,6 +38,7 @@ app.use(signupRoutes);
 app.use(loginRoutes);
 app.use(groupRoutes);
 app.use(chatRoutes);
+app.use(adminRoutes);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'views')));

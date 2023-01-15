@@ -13,22 +13,30 @@ exports.getChats = async (req, res, next) => {
 
     try{
             let chats = [];
+            let gid = req.params.gid;
             let lastMessageId = req.query.lastMessageID;
             if(lastMessageId == undefined) {
                 lastMessageId = 0;
             }
-            Chat.findAll({
+            Chat.findAll({ //join chats and users table
+                where: {
+                    GroupId: gid,
+                    id: {
+                        [Op.gt]: lastMessageId
+                    }
+                },
+                include: [{
+                    model: User,
+                    attributes: ['id', 'name', 'email']
+                }],
+                order: [
+                    ['id', 'ASC']
+                ]
+                
+                
+            }).then(result => {
 
-                attributes : ['message','createdAt','UserId','User.name','id'],
-                include: [{ model: User, attributes: ['name'] }],
-                where: { id: { [Op.gt]: lastMessageId } },
-                order: [['createdAt', 'ASC']]
-            
-
-
-            }).then(joinres => {
-
-                chats = joinres;
+                chats = result;
                 res.status(200).json({chats : chats});
 
             }).catch(err => {
@@ -49,11 +57,20 @@ exports.postChats = async (req, res, next) => {
             //console.log(req.user.dataValues);
             const userId = req.user.dataValues.id;
             const message = req.body.message;
-            const chat = await Chat.create({
-                message: message,
-                UserId: userId
-            });
-            res.status(201).json({ message: 'Message sent' });
+            const groupid= req.params.gid;
+            if (groupid==undefined) {
+                res.status(400).json({ message: 'Please join a group first to chat' });
+            }
+            else{
+                const chat = await Chat.create({
+                    message: message,
+                    UserId: userId,
+                    GroupId: groupid
+                });
+                res.status(201).json({ message: 'Message sent' });
+
+            }
+            
         
     }
     catch(err) {

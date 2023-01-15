@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 
 const User = require('../models/user');
+const Usersingroups = require('../models/usersingroups');
 
 exports.isAuth = (req,res,next) => {
     
@@ -14,7 +15,6 @@ exports.isAuth = (req,res,next) => {
             error.statusCode = 401;
             throw error;
         }
-
         User.findByPk(decodedToken.userId).then(row => {
 
             req.user = row;
