@@ -14,11 +14,15 @@ exports.isAuth = (req,res,next) => {
             error.statusCode = 401;
             throw error;
         }
-        User.findByPk(decodedToken.userId).then(user => {
 
-            req.user = user;
+        User.findByPk(decodedToken.userId).then(row => {
+
+            req.user = row;
             next();
-        })
+        }).catch(err => {
+
+            throw new Error(err);
+        });
     }
     catch(err){
 

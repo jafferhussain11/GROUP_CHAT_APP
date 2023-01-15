@@ -17,7 +17,6 @@ exports.getChats = async (req, res, next) => {
             if(lastMessageId == undefined) {
                 lastMessageId = 0;
             }
-            console.log(lastMessageId);
             Chat.findAll({
 
                 attributes : ['message','createdAt','UserId','User.name','id'],
