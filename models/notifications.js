@@ -16,10 +16,11 @@ const Notification = sequelize.define('Notification', {
 
         type : Sequelize.STRING
 
+    },
+    invitedGID : {
+
+        type : Sequelize.INTEGER
     }
-
-
-    
 
    
 });

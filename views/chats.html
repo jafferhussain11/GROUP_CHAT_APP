@@ -11,15 +11,45 @@
 <body>
     <div class="group-list">
         <h2>Groups</h2>
+        <button id="create-group-btn">Create Group +</button>
         <ul id="groupbox">
             
         </ul>
+        
+        <button id="notifications-btn">Notifications</button>
+        <br><br>
+        <div id="notifications-popup" class="popup">
+          <div class="popup-content">
+            <h3>Notifications</h3>
+            <ul id="notifications-list"></ul>
+            <button id="close-popup-btn">Close</button>
+          </div>
+        </div>
+
     </div>
+    
     
     <div class="chat-container">
         <div class="header">
-          <h1>Group Chat</h1>
+          <h2>Group Chat</h2>
         </div>
+        <div id="hamburger-menu">
+          <button id="hamburger-btn">☰</button>
+          <div id="menu-options">
+              <input type="text" id="search-field" placeholder="Email/Phone to perform action">
+              <button id="getinfo-btn">Get Info</button>
+              <button id="addusertogroup-btn">Add User to Group</button>
+              <button id="deleteuserfromgroup-btn">Delete User from Group</button>
+              <button id="makeadmin-btn">Make Admin</button>
+              <button id="invite-btn">Invite User to Group</button>
+          </div>
+          <div id="user-modal" style="display: none">
+            <h3>Users in Group</h3>
+            <ul id="user-list"></ul>
+            <button id="close-modal">Close</button>
+        </div>
+        
+      </div>  
         <div class="chat-area">
           <div id ="chatbox" class="chat-messages">
             <!-- Messages will be appended here dynamically using JavaScript -->
@@ -29,14 +59,16 @@
               <input type="text" id="message" placeholder="Type your message here...">
               <button id ="sendbtn" type="submit">Send</button>
             </form>
+            <form>
+              <input type="file" id="file-input" accept=".jpg,.jpeg,.PNG,.pdf,.png">
+              <button id="upload-btn">Upload</button>
+          </form>
+          
           </div>
         </div>
       </div>
 
-      <div id="notification-bar">
-        <p id="notification-message"></p>
-        <button id="close-btn">X</button>
-      </div>
+     
     
       <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.1.3/axios.min.js"></script>
     

@@ -38,8 +38,6 @@ exports.postGroups = async (req, res, next) => {//every user can create a group 
 
     try{
             const name = req.body.name;
-            console.log(name);
-            console.log(req);
             const uid = req.user.id;
             const group = await Group.create({
                 name: name,
@@ -117,6 +115,7 @@ exports.adminInvite = async (req, res, next) => {
                                     Notification.create({
                                         UserId: user.id,
                                         message: `You have been invited to join group ${group.name}`,
+                                        invitedGID: gid,
                                     }).then(result => {
 
                                         res.status(200).json({message: 'Invitation sent successfully'});

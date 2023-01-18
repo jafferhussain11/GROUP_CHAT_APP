@@ -9,26 +9,30 @@ body {
     display: flex;
     flex-direction: column;
     height: 100vh;
-    left: 25%; /* Adjust this value */
+    left: 24%; /* Adjust this value */
     position: fixed;
+    border-color: black;
+    border-width: 1px;
     top: 0;
-    width: 75%; /* 75% of the remaining width */
+    width: 77%; /* 75% of the remaining width */
 }
 
   
   .header {
     background-color: #333;
     color: #fff;
-    padding: 20px;
-    text-align: center;
+    padding: 10px;
+    text-align:center;
     height: 8%;
   }
   
   .chat-area {
-    background-color: #f5c2c2;
+    background-color: #333;
     flex: 1;
     overflow-y: scroll;
-    padding: 20px;
+    border: black;
+    border-width: 1px;
+   /* padding: 20px;*/
   }
   
   .chat-messages {
@@ -47,14 +51,13 @@ body {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    bottom: 10px;
-    width: 92%;
-    background-color: #f5f5f5;
+    width: 97%;
+    background-color: #333;
     padding: 10px;
-    border-top: 1px solid #ccc;
+    border-top: 1px solid #333;
     margin: auto;
-    height : 8%;
-    right: 30px;
+    height : 7%;
+   
 }
 
 .chat-input form {
@@ -82,8 +85,10 @@ body {
   #chatbox {
     background-color: grey;
     padding: 20px;
-    height: 80%;
+    height: 82%;
     overflow-y: scroll;
+    width :97%;
+
   }
   
   #chatbox div {
@@ -103,7 +108,7 @@ body {
 }
 /* Group list container */
 .group-list {
-    background-color: #d98d8d;
+    background-color: #333;
     height: 100%;
     position: fixed;
     left: 0;
@@ -111,17 +116,20 @@ body {
     padding: 20px;
     top: 0;
     width: 22%;
+    border: wheat;
+    border-width: 1px;
 }
 
 /* Group list title */
 .group-list h2 {
     margin-bottom: 20px;
     text-align: center;
+    color: wheat;
 }
 
 /* Group list items */
 .group-list li {
-    border: 1px solid #333;
+    border: 1px solid wheat;
     border-radius: 5px;
     list-style: none;
     margin-bottom: 10px;
@@ -131,7 +139,7 @@ body {
 
 /* Group list links */
 .group-list a {
-    color: #333;
+    color: wheat;
     display: block;
     text-decoration: none;
     transition: color 0.2s ease;
@@ -169,4 +177,62 @@ body {
   color: #fff;
   border: none;
   cursor: pointer;
+}
+#hamburger-menu {
+  position: absolute;
+  top: 2%;
+  right: 10px;
+  background-color: grey;
+  color: black;
+}
+
+#hamburger-btn {
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 0.5em 1em;
+  font-size: 1.5em;
+  border: none;
+  text-align: center;
+}
+
+#menu-options {
+  display: none;
+  background-color: #f2f2f2;
+  padding: 0.5em;
+}
+
+#search-field {
+  margin-bottom: 0.5em;
+  padding: 0.5em;
+}
+
+#getinfo-btn, #addusertogroup-btn, #deleteuserfromgroup-btn, #makeadmin-btn {
+  background-color: #333;
+  color: #fff;
+  padding: 0.5em 1em;
+  margin-right: 0.5em;
+  border: none;
+}
+
+.popup {
+  position: absolute;
+  background-color: white;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+}
+#create-group-btn, #notifications-btn{
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer; 
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+  
+}
+#file-input {
+  background-color:grey;
 }

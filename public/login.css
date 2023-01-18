@@ -1,19 +1,37 @@
 body {
     font-family: sans-serif;
     background-image: url("https://img.freepik.com/free-vector/illustration-business-people_53876-6308.jpg?w=740&t=st=1673456953~exp=1673457553~hmac=b10b8e8507790e6e7af7a61324cfad158e1ccb910ff60eaddd30ae8f2110cdaa");
-    background-size: fill;
-    background-position: right;
+    background-size: 50% ;
+    background-position: left;
+    background-repeat: no-repeat;
 }
 h1 {
     text-align: center;
     margin: 20px 0;
 }
 form {
-    max-width: 400px;
+    /*
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
+    float : right;*/
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+   
+    max-width: 450px;
+    width: 35%;
+	float: right;
+	position: relative;
+	background-color: #c26868;
+	padding: 2em;
+	border-radius: 1em;
+	box-shadow: 0px 0px 10px #aaaaaa;
+	bottom: 60px;
+	right: 6%;
+    height: 100%;
+    top: 20%;
 }
 label {
     display: block;
@@ -76,7 +94,7 @@ button#forgotPasswordButton {
     border-color: #4caf50;
     border-radius: 4px;
     cursor: pointer;
-    position: absolute;
+    position: relative;
     left: 30%;
 
   }  
