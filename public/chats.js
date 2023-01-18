@@ -365,9 +365,7 @@ const displayNotifications = (notifications) => {
   });
 }
 
-// i.innerHTML =`${data.expenseval}   ${data.description}  ${data.category}
-//      <button id="edit" onClick=editExpense('${data.expenseval}','${data.description}','${data.category}','${data.id}')>edit</button> 
-//      <button id="delete" onClick=deleteExpense('${data.id}')>delete</button>`;
+
 function acceptresponse(nid, gid) {
     const token = localStorage.getItem('token');
     const response = 'accept';
@@ -438,81 +436,3 @@ uploadBtn.addEventListener('click', (event) => {
 
 
 window.addEventListener('beforeunload', stopPolling);
-
-
-
-// const token = localStorage.getItem('token');
-//     // const lastMessageId = localStorage.getItem('lastMessageId');
-//     // console.log(lastMessageId);
-//     // let oldMessages = localStorage.getItem('oldMessages');
-    
-
-//     axios.get(`http://localhost:3000/groups`, { headers: { Authorization: token } })
-
-//         .then(response => {
-
-//             console.log(response);
-//             // const newmessages = response.data.chats; //new messages
-            
-//             if (oldMessages) {
-
-//                 const oldMessagesParsed  = JSON.parse(oldMessages);
-//                 chatsarrFinal = [...oldMessagesParsed, ...newmessages];
-//                 console.log(chatsarrFinal);
-                
-//                 chatsarrFinal.forEach(chat => {
-
-//                     displayMessage(chat);
-
-
-//                 });
-//             }
-//             else {
-
-//                 chatsarrFinal = newmessages;
-//                 chatsarrFinal.forEach(chat => {
-
-//                     displayMessage(chat);
-
-//                 });
-
-//             }
-//             if(chatsarrFinal.length > 10) {
-
-//                     chatsarrFinal = chatsarrFinal.slice(chatsarrFinal.length - 10);
-//                     localStorage.setItem('oldMessages', JSON.stringify(chatsarrFinal));
-//                     localStorage.setItem('lastMessageId', chatsarrFinal[chatsarrFinal.length - 1].id);
-//             }
-            
-            
-//         })
-//         .catch(err => {
-
-//             console.log(err);
-//         });
-// });
-
-
-// function checkForUpdates() {
-    
-//     if (!isTyping) {
-//         //make the request to server
-//         const currentTime = Date.now();
-//         if (!lastChecked || currentTime - lastChecked > 1000) {
-//             lastChecked = currentTime;
-//             const token = localStorage.getItem('token');
-//             axios.get('http://localhost:3000/chats', { headers: { Authorization: token } })
-//                 .then(response => {
-//                     console.log(response);
-//                     chatsarrFinal = response.data.chats;
-//                     chatsarrFinal.forEach(chat => {
-//                         displayMessage(chat);
-//                     });
-//                 })
-//                 .catch(err => {
-//                     console.log(err);
-//                 });
-//         }
-//     }
-// }
-// setInterval(checkForUpdates, 1000);
