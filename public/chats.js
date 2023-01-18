@@ -24,7 +24,7 @@ const admininvite = document.getElementById('invite-btn');
 function startPolling() {
     intervalId = setInterval(() => {
         const token = localStorage.getItem('token');
-        axios.get(`http://localhost:3000/chats/${currentGroup}` , { headers: { Authorization: token } })
+        axios.get(`http://13.233.133.166:3000/chats/${currentGroup}` , { headers: { Authorization: token } })
             .then(response => {
                 const chats = response.data.chats;
                 if (chats.length > chatsarrFinal.length) {
@@ -50,7 +50,7 @@ window.addEventListener('load', () => {
 
     const token = localStorage.getItem('token');
   
-    axios.get(`http://localhost:3000/groups`, { headers: { Authorization: token } })
+    axios.get(`http://13.233.133.166:3000/groups`, { headers: { Authorization: token } })
 
         .then( groups => {
             console.log(groups);
@@ -63,7 +63,7 @@ window.addEventListener('load', () => {
         })
     
     // Example call to get and display notifications
-    axios.get(`http://localhost:3000/chats/getnotifications`, { headers: { Authorization: localStorage.getItem('token') } })
+    axios.get(`http://13.233.133.166:3000/chats/getnotifications`, { headers: { Authorization: localStorage.getItem('token') } })
     .then(response => {
       const notifications = response.data.notifications;
       console.log(notifications);
@@ -85,7 +85,7 @@ sendbtn.addEventListener('click', (e) => {
     console.log(gid);
     const message = document.getElementById('message').value;
     const token = localStorage.getItem('token');
-    axios.post(`http://localhost:3000/chats/${gid}`, { message }, { headers: { Authorization: token } }).then(response => {
+    axios.post(`http://13.233.133.166:3000/chats/${gid}`, { message }, { headers: { Authorization: token } }).then(response => {
 
         console.log(response);
     }).catch(err => {
@@ -170,7 +170,7 @@ createGroupBtn.addEventListener('click', () => {
         e.preventDefault();
         const token = localStorage.getItem('token');
         const groupName = document.getElementById('group-name').value;
-        axios.post('http://localhost:3000/creategroup', { name: groupName }, { headers: { Authorization: token } })
+        axios.post('http://13.233.133.166:3000/creategroup', { name: groupName }, { headers: { Authorization: token } })
             .then(response => {
                 console.log(response);
                 form.remove();
@@ -200,7 +200,7 @@ function displayGroup(group) {
         const token = localStorage.getItem('token');
         const groupid = e.target.getAttribute('href').slice(1);
         currentGroup = groupid;
-        axios.get(`http://localhost:3000/chats/${groupid}` , { headers: { Authorization: token } })
+        axios.get(`http://13.233.133.166:3000/chats/${groupid}` , { headers: { Authorization: token } })
         .then(response => {
                 chatbox.innerHTML = '';
                 console.log(response);
@@ -227,7 +227,7 @@ function displayGroup(group) {
 getusersinfo.addEventListener('click', (e) => {
     e.preventDefault();
     const token = localStorage.getItem('token');
-    axios.get(`http://localhost:3000/admin/getusers/${currentGroup}`, { headers: { Authorization: token } })
+    axios.get(`http://13.233.133.166:3000/admin/getusers/${currentGroup}`, { headers: { Authorization: token } })
     .then(response => {
         const users = response.data.users;
         
@@ -258,7 +258,7 @@ addusertogroup.addEventListener('click', (e) => {
     const token = localStorage.getItem('token');
     const emailphone = document.getElementById('search-field').value;
     const gid = currentGroup;
-    axios.post(`http://localhost:3000/admin/adduser`, { emailphone, gid }, { headers: { Authorization: token } })
+    axios.post(`http://13.233.133.166:3000/admin/adduser`, { emailphone, gid }, { headers: { Authorization: token } })
     .then(response => { 
         console.log(response);
         const alertodisp = response.data.message;
@@ -277,7 +277,7 @@ deleteuserfromgroup.addEventListener('click', (e) => {
     const token = localStorage.getItem('token');
     const emailphone = document.getElementById('search-field').value;
     const gid = currentGroup;
-    axios.post(`http://localhost:3000/admin/removeuser`, { emailphone, gid }, { headers: { Authorization: token } })
+    axios.post(`http://13.233.133.166:3000/admin/removeuser`, { emailphone, gid }, { headers: { Authorization: token } })
     .then(response => {
 
         const alertodisp = response.data.message;
@@ -297,7 +297,7 @@ makeadmin.addEventListener('click', (e) => {
     const token = localStorage.getItem('token');
     const emailphone = document.getElementById('search-field').value;
     const gid = currentGroup;
-    axios.post(`http://localhost:3000/admin/makeadmin`, { emailphone, gid }, { headers: { Authorization: token } })
+    axios.post(`http://13.233.133.166:3000/admin/makeadmin`, { emailphone, gid }, { headers: { Authorization: token } })
     .then(response => {
 
         console.log(response);
@@ -325,7 +325,7 @@ admininvite.addEventListener('click', (e) => {
         return;
     }
 
-    axios.post(`http://localhost:3000/invitemember`, { email, gid }, { headers: { Authorization: token } })
+    axios.post(`http://13.233.133.166:3000/invitemember`, { email, gid }, { headers: { Authorization: token } })
     .then(response => {
 
         console.log(response);
@@ -369,7 +369,7 @@ const displayNotifications = (notifications) => {
 function acceptresponse(nid, gid) {
     const token = localStorage.getItem('token');
     const response = 'accept';
-    axios.post(`http://localhost:3000/inviteresp`, { nid, response, gid }, { headers: { Authorization: token } })
+    axios.post(`http://13.233.133.166:3000/inviteresp`, { nid, response, gid }, { headers: { Authorization: token } })
     .then(response => {
 
         console.log(response);
@@ -386,7 +386,7 @@ function acceptresponse(nid, gid) {
 function declineresponse(nid,gid) {
     const token = localStorage.getItem('token');
     const response = 'decline';
-    axios.post(`http://localhost:3000/inviteresp`, { nid, response, gid }, { headers: { Authorization: token } })
+    axios.post(`http://13.233.133.166:3000/inviteresp`, { nid, response, gid }, { headers: { Authorization: token } })
     .then(response => {
 
         console.log(response);
@@ -420,7 +420,7 @@ uploadBtn.addEventListener('click', (event) => {
     formData.append('file', file);
     formData.append('filename', filename);
 
-    axios.post(`http://localhost:3000/chats/upload/${gid}`, formData, {
+    axios.post(`http://13.233.133.166:3000/chats/upload/${gid}`, formData, {
         headers: {
             Authorization: localStorage.getItem('token'),
             'Content-Type': 'multipart/form-data'

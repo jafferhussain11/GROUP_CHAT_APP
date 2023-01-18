@@ -114,7 +114,7 @@
 
 		<input type="submit" value="Sign Up">
 	</form>
-	<p class="signin-link">Already have an account? <a href="http://localhost:3000/login">Sign in here</a>.</p>
+	<p class="signin-link">Already have an account? <a href="http://13.233.133.166:3000/login">Sign in here</a>.</p>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.1.3/axios.min.js"></script>
 	<script>
 		let form = document.querySelector("form");
@@ -128,7 +128,7 @@
 
 			let user = { name: name, email: email, phone: phone, password: password }
 
-			axios.post("http://localhost:3000/signup", user).then(function (response) {
+			axios.post("http://13.233.133.166:3000/signup", user).then(function (response) {
 
 				//alert the user that the user has been created
 				alert(response.data.message);
