@@ -9,6 +9,7 @@
     <script src="chats.js" defer></script>
 </head>
 <body>
+  <div class="container">
     <div class="group-list">
         <h2>Groups</h2>
         <button id="create-group-btn">Create Group +</button>
@@ -55,11 +56,11 @@
             <!-- Messages will be appended here dynamically using JavaScript -->
           </div>
           <div class="chat-input">
-            <form>
+            <form id="chatform1">
               <input type="text" id="message" placeholder="Type your message here...">
               <button id ="sendbtn" type="submit">Send</button>
             </form>
-            <form>
+            <form id="chatform2">
               <input type="file" id="file-input" accept=".jpg,.jpeg,.PNG,.pdf,.png">
               <button id="upload-btn">Upload</button>
           </form>
@@ -67,9 +68,7 @@
           </div>
         </div>
       </div>
-
-     
-    
+    </div>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.1.3/axios.min.js"></script>
     
 </body>
